@@ -18,5 +18,16 @@ def base64_to_hex ( base64_text ):
    #print(hex_text)
    return hex_text
    
-def pad( text ):
-   return None
+def pad(text, blocksize):
+   padding = blocksize - (len(text) % blocksize)
+
+   for i in range(padding):
+      text += str(padding)
+
+   return text
+
+paddedText = pad("Hello I'm a message", 8)
+
+print(paddedText + "\nLength:" )
+
+
