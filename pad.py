@@ -22,12 +22,13 @@ def pad(text, blocksize):
    padding = blocksize - (len(text) % blocksize)
 
    for i in range(padding):
-      text += str(padding)
-
+      text += str(chr(padding))
+      
    return text
 
+def unpad():
+   return None
+   
 paddedText = pad("Hello I'm a message", 8)
-
-print(paddedText + "\nLength:" )
-
-
+paddedTextHex = ascii_to_hex(paddedText)
+print(paddedTextHex)
