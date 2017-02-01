@@ -19,16 +19,24 @@ def base64_to_hex ( base64_text ):
    return hex_text
    
 def pad(text, blocksize):
-   padding = blocksize - (len(text) % blocksize)
-
-   for i in range(padding):
-      text += str(chr(padding))
+   if blocksize > 1:
+      padding = blocksize - (len(text) % blocksize)
+      for i in range(padding):
+        text += str(chr(padding))
       
    return text
+
+def testPad():
+   i = 1
+   for i in range(15):
+      message = "Hello I'm a message"
+      print("Padding message " + message + " with length of " + str(len(message)))
+      paddedText = pad(message, i)
+      paddedTextHex = ascii_to_hex(paddedText)
+      print("Padded with blocksize of " + str(i) + " results in\n" + paddedTextHex)
 
 def unpad():
    return None
    
-paddedText = pad("Hello I'm a message", 8)
-paddedTextHex = ascii_to_hex(paddedText)
-print(paddedTextHex)
+testPad()
+print(pad("Message", 8))
