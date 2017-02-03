@@ -40,30 +40,31 @@ def unpad(text, blocksize):
    pad = 0
    if len(text) % blocksize != 0:
       print("Invalid Padding")
-      return None
+      return text
    
    for i in range(len(text) - 1, -1, -1):
       if i == len(text) - 1:
          pad = ord(text[i])
          count = pad - 1
-      
-      if ord(text[i]) == pad:
+         #print(count)
+      elif ord(text[i]) == pad:
          count -= 1
       else:
+         print(ord(text[i]))
          print("Invalid Padding")
-         return None
+         return text
       
       if count == 0:
          return text[:len(text) - pad]
          
-   return None
+   return text
    
-paddedText = pad("Hello I'm a message", 8)
+"""paddedText = pad("Hello I'm a message!", 10)
 paddedTextHex = ascii_to_hex(paddedText)
 print(paddedTextHex)
-unpadText = unpad(paddedText, 8)
+unpadText = unpad(paddedText, 10)
 unpaddedTextHex = ascii_to_hex(unpadText)
 
 print(paddedTextHex)
 print(unpadText)
-print(unpaddedTextHex)
+print(unpaddedTextHex)"""
