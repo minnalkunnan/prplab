@@ -36,8 +36,25 @@ def ecb_decrypt(key, ciphertext, blocksize):
 	   
 	return unpaddedText
 
-cText = ecb_encrypt("California Love!", "Message text over sixteen bytes", 16)
+#cText = ecb_encrypt("California Love!", "Message text over sixteen bytes", 16)
 #print(pad.ascii_to_hex(cText))
-pText = ecb_decrypt("California Love!", cText, 16)
+
+#pText = ecb_decrypt("California Love!", cText, 16)
 #print(pad.ascii_to_hex(pText))
-print(pText)
+#print(pText)
+
+#decodedLines = []
+with open("Lab2.TaskII.A.txt") as f:
+   lines = f.readlines()
+   
+print(lines)
+for line in lines:
+   print(pad.base64_to_hex(line.replace("\n", "")))
+for line in lines:
+   print(ecb_decrypt("CALIFORNIA LOVE!", line.replace("\n", ""), 16))
+
+   
+   
+   
+   
+   
