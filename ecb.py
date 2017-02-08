@@ -91,7 +91,7 @@ def task2B():
    
    #print(bestLine)
    #print(asciiLine.decode("cp852"))
-   image = open("OutputImage.jpg", "wb")
+   image = open("OutputImage.bmp", "wb")
    image.write(binascii.unhexlify(bestLine.replace("\n", "")))
    image.close()
    
