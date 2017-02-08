@@ -1,4 +1,6 @@
 import pad
+import codecs
+import binascii
 from Crypto.Cipher import AES
 
 def ecb_encrypt(key, plaintext, blocksize):
@@ -19,6 +21,7 @@ def ecb_decrypt(key, ciphertext, blocksize):
 	fullText = ""
 	
 	if len(ciphertext) % blocksize != 0:
+	   print(len(ciphertext))
 	   print("Error: Ciphertext not a multiple of block size")
 	   return ciphertext
 	
@@ -44,17 +47,57 @@ def ecb_decrypt(key, ciphertext, blocksize):
 #print(pText)
 
 #decodedLines = []
-with open("Lab2.TaskII.A.txt") as f:
-   lines = f.readlines()
-   
-print(lines)
-for line in lines:
-   print(pad.base64_to_hex(line.replace("\n", "")))
-for line in lines:
-   print(ecb_decrypt("CALIFORNIA LOVE!", line.replace("\n", ""), 16))
+def task2A():
+   with open("Lab2.TaskII.A.txt") as f:
+      lines = f.readlines()
 
+   fileLine = ""
+   for line in lines:
+      fileLine += pad.hex_to_ascii(pad.base64_to_hex(line.replace("\n", "")))
+   print(ecb_decrypt("CALIFORNIA LOVE!", fileLine, 16))
    
+   #print(len(fileLine))
+   #print(pad.hex_to_base64(pad.ascii_to_hex(ecb_encrypt("CALIFORNIA LOVE!", ecb_decrypt("CALIFORNIA LOVE!", fileLine, 16), 16))))
    
+
+def task2B():
+   with open("Lab2.TaskII.B.txt") as f:
+      lines = f.readlines()
+
+   fileLine = ""
+   maxEqCount = -1
+   bestLine = ""
+   blocksize = 32
+   for line in lines:
+      curEqCount = 0
+      trimLine = line[108:]
+      lineBlocks = []
+      for i in range(0, len(trimLine) / blocksize):
+         lineBlocks.append(trimLine[i * blocksize:(i*blocksize) + blocksize])
+      for i in range(0, len(lineBlocks)):
+         for j in range(i + 1, len(lineBlocks)):
+            if lineBlocks[i] == lineBlocks[j]:
+               curEqCount += 1
+      
+      #print(curEqCount)
+      if curEqCount > maxEqCount:
+         maxEqCount = curEqCount
+         bestLine = line
+      #print(line[108:])
    
+   #print(maxEqCount)
+   #print(bestLine)
+   asciiLine = pad.hex_to_ascii(bestLine.replace("\n",""))
    
-   
+   #print(asciiLine)
+   image = open("OutputImage.jpg", "wb")
+   image.write(binascii.unhexlify(bestLine.replace("\n", "")))
+   image.close()
+   print(binascii.unhexlify(bestLine.replace("\n", "")))
+
+   #fo = codecs.open('OutputImage.jpg', 'r', 'ascii')
+   #lines = fo.readlines()
+   #for line in lines:
+      #print(line)
+#task2A()
+task2B()
