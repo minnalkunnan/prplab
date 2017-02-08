@@ -89,11 +89,16 @@ def task2B():
    #print(bestLine)
    asciiLine = pad.hex_to_ascii(bestLine.replace("\n",""))
    
-   #print(asciiLine)
+   #print(bestLine)
+   #print(asciiLine.decode("cp852"))
    image = open("OutputImage.jpg", "wb")
    image.write(binascii.unhexlify(bestLine.replace("\n", "")))
    image.close()
-   print(binascii.unhexlify(bestLine.replace("\n", "")))
+   
+   #f = open('OutputImage.txt', 'r')
+   #print(f.read())
+   #f.close()
+   #print(binascii.unhexlify(bestLine.replace("\n", "")))
 
    #fo = codecs.open('OutputImage.jpg', 'r', 'ascii')
    #lines = fo.readlines()
