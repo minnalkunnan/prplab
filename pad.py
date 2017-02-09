@@ -59,6 +59,30 @@ def unpad(text, blocksize):
          
    return text
    
+def unpadANSI(text, blocksize):
+   count = 0
+   pad = 0
+   if len(text) % blocksize != 0:
+      print("Invalid Padding")
+      return text
+   
+   for i in range(len(text) - 1, -1, -1):
+      if i == len(text) - 1:
+         pad = ord(text[i])
+         count = pad - 1
+         #print(count)
+      elif ord(text[i]) == chr(0):
+         count -= 1
+      else:
+         print(ord(text[i]))
+         print("Invalid Padding")
+         return text
+      
+      if count == 0:
+         return text[:len(text) - pad]
+         
+   return text
+   
 """paddedText = pad("Hello I'm a message!", 10)
 paddedTextHex = ascii_to_hex(paddedText)
 print(paddedTextHex)
