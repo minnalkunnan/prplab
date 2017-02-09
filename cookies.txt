@@ -1,3 +1,6 @@
-End of admin string: e8d9b03e69a78b5db7ca7d8b605e5240
+For EBC Mode
+End of admin cookie: Will be the repeating portion of the auth_token in the 2nd and 3rd blocks
+Use with user that has 15 character long username (adminadminadmin) by placing it in the last 32 bytes of the auth_token after logging in.
 
-Use with user that has 15 character long username
+For CBC Mode
+
