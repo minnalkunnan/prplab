@@ -71,7 +71,7 @@ def unpadANSI(text, blocksize):
          pad = ord(text[i])
          count = pad - 1
          #print(count)
-      elif ord(text[i]) == chr(0):
+      elif ord(text[i]) == 0:
          count -= 1
       else:
          print(ord(text[i]))
@@ -83,7 +83,16 @@ def unpadANSI(text, blocksize):
          
    return text
    
-"""paddedText = pad("Hello I'm a message!", 10)
+def padANSI(text, blocksize):
+   if blocksize > 1:
+      padding = blocksize - (len(text) % blocksize)
+      for i in range(padding - 1):
+        text += str(chr(0))
+      text += str(chr(padding))
+   return text
+   
+"""   
+paddedText = pad("Hello I'm a message!", 10)
 paddedTextHex = ascii_to_hex(paddedText)
 print(paddedTextHex)
 unpadText = unpad(paddedText, 10)
@@ -91,4 +100,17 @@ unpaddedTextHex = ascii_to_hex(unpadText)
 
 print(paddedTextHex)
 print(unpadText)
-print(unpaddedTextHex)"""
+print(unpaddedTextHex)
+"""
+
+"""
+paddedText = padANSI("Hello I'm a message!", 10)
+paddedTextHex = ascii_to_hex(paddedText)
+print(paddedTextHex)
+unpadText = unpadANSI(paddedText, 10)
+unpaddedTextHex = ascii_to_hex(unpadText)
+
+print(paddedTextHex)
+print(unpadText)
+print(unpaddedTextHex)
+"""
