@@ -26,6 +26,25 @@ def pad(text, blocksize):
       
    return text
 
+def XOR_text_key ( text , key ):
+   main_key = key
+   new_text = ""
+   while len(main_key) < len(text):
+      main_key += key
+   main_key = main_key[:len(text)]
+   
+   hex_text = ascii_to_hex(text)
+   hex_key = ascii_to_hex(main_key)
+   
+   hex_new_text = hex(int(hex_text, 16) ^ int(hex_key, 16))
+   hex_new_text = hex_new_text[2:len(hex_new_text)-1]
+
+   if len(hex_new_text) % 2 != 0:
+      hex_new_text = "0" + hex_new_text
+      
+   new_text = hex_to_ascii(hex_new_text)
+   return new_text
+   
 def testPad():
    i = 1
    for i in range(15):
