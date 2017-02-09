@@ -39,7 +39,8 @@ def XOR_text_key ( text , key ):
    hex_new_text = hex(int(hex_text, 16) ^ int(hex_key, 16))
    hex_new_text = hex_new_text[2:len(hex_new_text)-1]
 
-   if len(hex_new_text) % 2 != 0:
+   #print(len(hex_new_text))
+   while len(hex_new_text) != len(hex_text):
       hex_new_text = "0" + hex_new_text
       
    new_text = hex_to_ascii(hex_new_text)
