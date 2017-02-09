@@ -48,4 +48,21 @@ def task3A():
    print(cbc_decrypt("MIND ON MY MONEY", fileLine, "MONEY ON MY MIND"))
    #print(pad.hex_to_base64(pad.ascii_to_hex(cbc_encrypt("MIND ON MY MONEY", cbc_decrypt("MIND ON MY MONEY", fileLine, "MONEY ON MY MIND"), "MONEY ON MY MIND"))))
 
+def task3B():
+   dCook = "user=aaaaaaaaaaaa&UID=1&role=user"
+   iv = "money on my mind"
+   key = "mind on my money"
+   
+   eCook = cbc_encrypt(key, dCook, iv)
+   #print(pad.ascii_to_hex(eCook))
+   iv = eCook[0:16]
+   iv = pad.XOR_text_key(iv, "role=admin&user=")
+   iv = pad.XOR_text_key(iv, "user=aaaaaaaaaaa")
+   print("Old Cookie: " + pad.ascii_to_hex(eCook) + "\n")
+   eCook = iv + eCook[16:len(eCook)]
+   print("New Cookie: " + pad.ascii_to_hex(eCook) + "\n")
+   cook = cbc_decrypt(key, eCook, iv)
+   print(cook)
+
 #task3A()
+task3B()
